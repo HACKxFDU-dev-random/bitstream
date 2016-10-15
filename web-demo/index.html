@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BitStream | Web Demo</title>
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,maximum-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.js"></script>
+    <![endif]-->
+</head>
+
+<body class="">
+    <a href="#content" class="sr-only">Skip to main content</a>
+    <div class="navbar navbar-default navbar-fixed-top animated hide js-fixed-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#fixed-navigation-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/">
+                    <h1 class="navbar-brand inline"><span class="logo">BitStream Web Demo</span></h1>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="fixed-navigation-toggle">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#">BitStream Web Demo</a></li>
+                </ul>
+            </div><!-- close .navbar-collapse -->
+        </div><!-- close .container -->
+    </div> <!-- close .nav -->
+
+    <div class="sheet sheet--dark sheet--home sheet--transparent sheet--with-bg sheet--hero sheet--padding" style="background-image: url(image/background.jpg)">
+      <div class="container">
+        <!-- Top Navigation -->
+
+        <div class="navbar navbar-transparent " role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#static-navigation-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> <!-- close .navbar-header -->
+
+                <div class="collapse navbar-collapse" id="static-navigation-toggle">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div><!-- close .navbar-collapse -->
+            </div><!-- close .container-fluid -->
+        </div> <!-- close .navbar -->
+        <!-- end Top Navigation -->
+
+        <div class="sheet__heading text-center">
+            <div class="row">
+                <div class="col-sm-12 center-block">
+                    <h1 class="mega text-heading-alt text-shadow text-primary xs-margin-null">BitStream Web Demo</br><span class="text">Sharing From You</br>Sharing For You</span></h1>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 center-block text-center">
+              </div>
+            </div>
+            <div class="row xs-margin-top">
+              <div class="col-xs-12 col-sm-8 center-block">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content" role="main">
+      <!-- Generate -->
+      <section class="sheet sheet--light sheet--padding" id="Generate">
+        <div class="container-fluid">
+            <div class="terminal-window animated bounceInUp">
+                <header>
+                  <div class="button"></div>
+                  <div class="button"></div>
+                  <div class="button"></div>
+                </header>
+                <section class="terminal">
+                  <div class="history tty" id="tty">
+
+                  </div>
+                  $&nbsp;<span class="prompt"></span><span class="typed-cursor">|</span><span class="typed-cursor"></span><span class="typed-cursor"></span><span class="typed-cursor"></span><span class="typed-cursor"></span>
+                  <span class="typed-cursor"></span>
+                </section>
+            </div>
+        </div>
+      </section>
+      <!-- end Generate -->
+
+    </div>
+    <!-- end #content -->
+    <script src="js/jquery.js"></script>
+    <script src="js/marketing.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="js/client-config.js"></script>
+    <script src="js/bs_cli_sensor.js"></script>
+    <script src="js/bs_cli_server.js"></script>
+    <script>
+      var testServer = new Server(client_config.host, client_config.port, client_config.appkey).connect(function (socket) {
+        testServer.getData(Date.now(), '86cfca41fac42f414c474a372bbe5acb'); // data id md5
+        socket.on('DATA', function (data) {
+          data["temperature"] = data["data"];
+          delete data["data"];
+          $("#tty").append('$ ').append(JSON.stringify(data)).append('</br>');
+          console.log('Get data from data stream:', data);
+        });
+      });
+      setTimeout(function () {
+        var testSensor = new Sensor();
+        var thisServer = new Server(client_config.host, client_config.port, client_config.appkey).connect(function (socket) {
+          setInterval(function () {
+            data = testSensor.data();
+            console.log('Trying to posting data...:', data);
+            thisServer.postData(data);
+          }, 1000);
+        });
+      }, 1000);
+    </script>
+</body>
+</html>

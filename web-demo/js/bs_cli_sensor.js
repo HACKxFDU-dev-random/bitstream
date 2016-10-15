@@ -1,0 +1,18 @@
+function Sensor(sensor_address) {
+    //this.isConnected = false;
+    var date = Date.now();
+    this.connect = function () {
+        this.isConnected = true;
+        return this;
+    };
+
+    this.disconnect = function () {
+        this.isConnected = false;
+    };
+
+    this.data = function () {
+        date = Date.now();
+        // generate temperature data
+        return Math.random() % 0.3 + 25;
+    };
+}
