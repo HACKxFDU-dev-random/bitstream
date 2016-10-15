@@ -1,12 +1,10 @@
-var host = '127.0.0.1';
-var port = 3000;
 var io = require("socket.io-client");
 var Server = require('./bs_cli_server.js');
+var client_config = require('./client-config.js');
 
-var testServer = new Server('127.0.0.1', 3000, 'appkeyappsecret').connect(function (socket) {
-    testServer.getData(Date.now(), '86cfca41fac42f414c474a372bbe5acb');
+var testServer = new Server(client_config.host, client_config.port, client_config.appkey).connect(function (socket) {
+    testServer.getData(Date.now(), '86cfca41fac42f414c474a372bbe5acb'); // data id md5
     socket.on('DATA', function (data) {
-        console.log('Get data from POSTed data:', data);
+        console.log('Get data from data stream:', data);
     });
 });
-

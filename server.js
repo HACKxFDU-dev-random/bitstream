@@ -1,5 +1,3 @@
-var port = 3000;
-var host = '127.0.0.1';
 var clients = {};
 var idOfOnBroadcastingData = [];
 
@@ -11,8 +9,9 @@ var md5 = require('md5');
 var forEach = require('async-foreach').forEach;
 var async = require('async');
 var SyncPromise = require('sync-promise');
+var server_config = require('./server-config.js');
 
-var db = redis.createClient(6379, host, {enable_offline_queue:false});
+var db = redis.createClient(server_config.redis_port, server_config.redis_host, {enable_offline_queue:false});
 var db_multi = db.multi();
 var _ = require('underscore');
 
@@ -34,7 +33,7 @@ var _ = require('underscore');
 
 app.get('/',function(req,res){
     //code...
-    res.send('Coming soon...【哦是吗');
+    res.send('Coming soon...');
 });
 
 db.on('connect', function () {
@@ -155,7 +154,7 @@ io.on("connection",function(socket){
         delete clients[socket.id];
 
 
-        var db = redis.createClient(6379, host);
+        var db = redis.createClient(server_config.redis_port, server_config.redis_host);
         // TO: delete socket.id from data listener list
         //db.lrem(data_id, 1, socket.id);
         db.del(socket.id);
@@ -178,6 +177,6 @@ function checkOperationAuth(appkey, operand, data, auth, block) {
     return true;
 }
 
-http.listen(3000, function () {
-    console.log('listening on *:', port);
+http.listen(server_config.port, function () {
+    console.log('listening on *:', server_config.port);
 });

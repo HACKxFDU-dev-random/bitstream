@@ -36,7 +36,7 @@ module.exports = function Server(host, port, appkeyappsecret) {
                 id = socket_id['socket_id'];
 
                 socket.on('DATA', function (data) {
-                    console.log('Get data from POSTed data:', data);
+                    console.log('Get data from data stream:', data);
                     callback(data);
                 });
 
@@ -100,8 +100,8 @@ function test() {
             console.log('Processing sensor data...', data);
             socket.emit('OPERATION', 'POST_RT', 'appkey', data);
         }
-    }setInterval(getData, 500);
+    }
+
+    setInterval(getData, 500);
     // like a synced while(true).
 }
-
-

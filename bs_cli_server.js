@@ -6,9 +6,9 @@ module.exports = function Server(host, port, appkeyappsecret) {
 
     this.connect = function (callback) {
         console.log('Connecting to server....');
-        var socket = io.connect('http://localhost:3000', {'forceNew': true});
+        var socket = io.connect('http://'+host+':'+port, {'forceNew': true});
         this.isConnected = true;
-        socket.emit('authenticate', {token: 'appkeyappsecret'});
+        socket.emit('authenticate', {token: appkeyappsecret});
         this.postData = function (data) {
             socket.emit('OPERATION', 'POST_RT', 'appkey', data);
         };
@@ -41,4 +41,3 @@ module.exports = function Server(host, port, appkeyappsecret) {
         return this;
     };
 };
-

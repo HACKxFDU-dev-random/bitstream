@@ -1,8 +1,7 @@
-var host = '127.0.0.1';
-var port = 3000;
+var client_config = require('./client-config.js');
 var io = require("socket.io-client");
 var Sensor = require('./bs_cli_sensor.js');
-var socket = io.connect('http://localhost:3000', {'forceNew': true});
+var socket = io.connect('http://'+client_config.host+':'+client_config.port, {'forceNew': true});
 
 /*need a configure file to save:
 .py file name to start child process;
@@ -26,10 +25,10 @@ function test() {
 
 socket.on('connect', function() {
     var id = '';
-    var socket = io.connect('http://localhost:3000', {'forceNew': true});
+    var socket = io.connect('http://'+client_config.host+':'+client_config.port, {'forceNew': true});
     id  = socket.id;
     console.log('Server Connecting!');
-    socket.emit('authenticate', {token: 'appkeyappsecret'});
+    socket.emit('authenticate', {token: client_config.appkey});
 
     socket.on('AUTH_SUCCESS', function(socket_id){
         console.log('Auth success, Received data:', socket_id);
@@ -50,6 +49,3 @@ socket.on('connect', function() {
     })
 
 });
-
-
-
