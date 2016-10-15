@@ -8,13 +8,15 @@ IoT data stream, everything is data. 物联网数据流
 ### Server
 ```
 yarn
+npm install forever -g
+redis-server ./redis.conf
 forever start -l forever.log -o out.log -e err.log server.js
 ```
 
 ### Client (For Quick Test)
 ```
-node client_data_getter.js
-node client_data_setter.js
+node client_data_getter.js &
+node client_data_sender.js
 ```
 
 ### Client (Programming)
