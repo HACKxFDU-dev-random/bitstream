@@ -8,7 +8,7 @@ IoT data stream, everything is data. 物联网数据流
 ### Server
 ```
 yarn
-npm install forever -g
+yarn global add forever
 redis-server ./redis.conf
 forever start -l forever.log -o out.log -e err.log server.js
 ```
