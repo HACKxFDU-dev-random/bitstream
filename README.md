@@ -8,10 +8,16 @@ IoT data stream, everything is data. 物联网数据流
 ### Server
 ```
 yarn
-forever start -l forever.log -o out.log -e err.log bs_cli_server.js
+forever start -l forever.log -o out.log -e err.log server.js
 ```
 
-### Client
+### Client (For Quick Test)
+```
+node client_data_getter.js
+node client_data_setter.js
+```
+
+### Client (Programming)
 ```
 var io = require("socket.io-client");
 var Server = require('./bs_cli_server.js');
