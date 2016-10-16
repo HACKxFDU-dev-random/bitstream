@@ -13,6 +13,6 @@ function Sensor(sensor_address) {
     this.data = function () {
         date = Date.now();
         // generate temperature data
-        return Math.random() % 0.3 + 25;
+        return {"temperature": Math.random() % 0.3 + 25, "time": date};
     };
 }
