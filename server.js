@@ -97,7 +97,7 @@ io.on("connection",function(socket){
 
                                 var timestamp = Date.now();
                                 //idOfOnBroadcastingData.push(data_id);
-                                // 我觉得用户有必要知道服务器发送这个数据的时间戳, 但是也可以不要 呵呵先留着吧握日
+                                // 我觉得用户有必要知道服务器发送这个数据的时间戳, 但是也可以不要
                                 // 这有问题, 记得测试对特定用户的广播
                                 console.log('Listener list for data: %s', data_id, ':', data);
                                 //console.log(listeners);
