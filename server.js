@@ -153,14 +153,7 @@ io.on("connection",function(socket){
         socket.disconnect('disconnect');
         delete clients[socket.id];
 
-
-        var db = redis.createClient(server_config.redis_port, server_config.redis_host);
-        // TO: delete socket.id from data listener list
-        //db.lrem(data_id, 1, socket.id);
-        db.del(socket.id);
-        //db.lrem(socket.id);
-        // Other logic you may or may not want
-        // Your other disconnect code here
+        db_multi.del(socket.id);
     });
 });
 
