@@ -3,20 +3,23 @@ IoT data stream, everything is data. 物联网数据流
 
 ## Dependency
 [redis](http://redis.io)
+[node.js](https://nodejs.org)
+[yarn](https://yarnpkg.com)
 
 ## Usage
 ### Server
 ```
-yarn
-yarn global add forever
-redis-server ./redis.conf
-forever start -a -l forever.log -o out.log -e err.log server.js
+$ yarn
+$ yarn global add forever
+$ redis-server ./redis.conf
+$ # You may edit ```server-config.js``` before forever runs
+$ forever start -a -l forever.log -o out.log -e err.log server.js
 ```
 
 ### Client (For Quick Test)
 ```
-node client_data_getter.js &
-node client_data_sender.js
+$ node client_data_getter.js &
+$ node client_data_sender.js
 ```
 
 ### Client (Programming)
