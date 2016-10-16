@@ -113,9 +113,7 @@
       var testServer = new Server(client_config.host, client_config.port, client_config.appkey).connect(function (socket) {
         testServer.getData(Date.now(), '86cfca41fac42f414c474a372bbe5acb'); // data id md5
         socket.on('DATA', function (data) {
-          data["temperature"] = data["data"];
-          delete data["data"];
-          $("#tty").append('$ ').append(JSON.stringify(data)).append('</br>');
+          $("#tty").append('$ [' + Date()  + '] <pre>' + JSON.stringify(data, null, 2) + '</pre></br>');
           console.log('Get data from data stream:', data);
         });
       });
