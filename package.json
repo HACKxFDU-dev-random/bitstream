@@ -15,6 +15,6 @@
     "sleep-async": "^1.0.1",
     "socketio": "^1.0.0",
     "sync-promise": "^1.0.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.12.1"
   }
 }
